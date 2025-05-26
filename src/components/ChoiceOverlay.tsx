@@ -4,7 +4,7 @@ type Props = {
   };
   
   export const ChoiceOverlay: React.FC<Props> = ({ choices, onSelect }) => (
-    <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 space-y-4">
+    <div className="absolute inset-0 flex flex-col justify-center items-center bg-transparent space-y-4">
       {choices.map((choice, idx) => (
         <button
           key={idx}

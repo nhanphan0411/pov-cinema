@@ -9,17 +9,30 @@ type StoryNode = {
 };
 
 export const storyGraph: Record<string, StoryNode> = {
-  "twin_intro": {
-    src: "/videos/twin_intro.mp4",
+  "test_intro": {
+    src: "/videos/english_cut.webm",
     choices: [
-      { label: "Believe him", next: "twin_choice1" },
-      { label: "Doubt him", next: "twin_choice2" },
-      { label: "Say nothing", next: "stripper_intro" }
+      { label: "spanish", next: "test_choice1" },
+      { label: "hindi", next: "test_choice2" },
+      { label: "german", next: "test_choice3" }
     ]
   },
-  "twin_choice1": {
-    src: "/videos/twin_choice1.mp4",
+
+  "test_choice1": {
+    src: "/videos/spanish.webm",
     choices: []
-  }
-  // ... other story nodes
+  },
+
+  "test_choice2": {
+    src: "/videos/hindi_cut.webm",
+    choices: []
+  },
+
+  "test_choice3": {
+    src: "/videos/german.webm",
+    choices: []
+  },
+
+
+  // TBC: other story nodes
 };
