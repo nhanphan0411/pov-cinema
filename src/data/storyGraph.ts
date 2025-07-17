@@ -44,7 +44,7 @@ export const storyGraph: Record<string, StoryNode> = {
   },
 
   "13": {
-    src: "/videos/final_clips/13.mov",
+    src: "/videos/final_clips/13.mp4",
     choices: []
   },
 
