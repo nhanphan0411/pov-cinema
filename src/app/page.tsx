@@ -12,7 +12,7 @@ export default function Home() {
   const [hasRung, setHasRung] = useState(false);
   const [showWaiting, setShowWaiting] = useState(false);
   const [showStory, setShowStory] = useState(false);
-  const [currentNodeKey, setCurrentNodeKey] = useState("12B");
+  const [currentNodeKey, setCurrentNodeKey] = useState("10");
   const [showChoices, setShowChoices] = useState(false);
   const [dotCount, setDotCount] = useState(1);
   const resetExperience = () => {
