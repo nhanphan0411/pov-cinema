@@ -54,9 +54,13 @@ export const VideoPlayer: React.FC<Props> = ({
     };
 
     video.addEventListener("ended", handleEnded);
-    video.readyState >= 1
-      ? handleLoaded()
-      : video.addEventListener("loadedmetadata", handleLoaded);
+    video.addEventListener("ended", handleEnded);
+    if (video.readyState >= 1) {
+      handleLoaded();
+    } else {
+      video.addEventListener("loadedmetadata", handleLoaded);
+    }
+
 
     return () => {
       video.removeEventListener("loadedmetadata", handleLoaded);
