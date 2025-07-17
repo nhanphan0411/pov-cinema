@@ -34,16 +34,16 @@ export const VideoPlayer: React.FC<Props> = ({
     };
 
     const handleEnded = () => {
-      if (freezeOnEnd && video) {
+      if (freezeOnEnd) {
         video.pause();
         video.currentTime = video.duration;
 
         const handleSeeked = () => {
-          video.removeEventListener('seeked', handleSeeked);
+          video.removeEventListener("seeked", handleSeeked);
           onEnd();
         };
 
-        video.addEventListener('seeked', handleSeeked);
+        video.addEventListener("seeked", handleSeeked);
       } else {
         onEnd();
       }
@@ -54,13 +54,12 @@ export const VideoPlayer: React.FC<Props> = ({
     };
 
     video.addEventListener("ended", handleEnded);
-    video.addEventListener("ended", handleEnded);
+
     if (video.readyState >= 1) {
       handleLoaded();
     } else {
       video.addEventListener("loadedmetadata", handleLoaded);
     }
-
 
     return () => {
       video.removeEventListener("loadedmetadata", handleLoaded);
