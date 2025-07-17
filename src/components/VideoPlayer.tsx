@@ -1,33 +1,68 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from "react";
 
 type Props = {
   src: string;
   onEnd: () => void;
+  loop?: boolean;
+  muted?: boolean;
+  freezeOnEnd?: boolean;
 };
 
-export const VideoPlayer: React.FC<Props> = ({ src, onEnd }) => {
+export const VideoPlayer: React.FC<Props> = ({
+  src,
+  onEnd,
+  loop = false,
+  muted = true,
+  freezeOnEnd = false
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.load();
-      video.muted = muted;
-      video.play().catch(() => {
-        // Autoplay blocked
-      });
-    }
-  }, [src, muted]);
+    if (!video) return;
 
-  const handleUnmute = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = false;
-      setMuted(false);
-      video.play();
-    }
-  };
+    video.muted = muted;
+    video.playsInline = true;
+
+    const tryPlay = () => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch((err) => {
+          console.warn("Video play failed:", err);
+        });
+      }
+    };
+
+    const handleEnded = () => {
+      if (freezeOnEnd && video) {
+        video.pause();
+        video.currentTime = video.duration;
+
+        const handleSeeked = () => {
+          video.removeEventListener('seeked', handleSeeked);
+          onEnd();
+        };
+
+        video.addEventListener('seeked', handleSeeked);
+      } else {
+        onEnd();
+      }
+    };
+
+    const handleLoaded = () => {
+      tryPlay();
+    };
+
+    video.addEventListener("ended", handleEnded);
+    video.readyState >= 1
+      ? handleLoaded()
+      : video.addEventListener("loadedmetadata", handleLoaded);
+
+    return () => {
+      video.removeEventListener("loadedmetadata", handleLoaded);
+      video.removeEventListener("ended", handleEnded);
+    };
+  }, [src, onEnd, freezeOnEnd, muted]);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -35,22 +70,9 @@ export const VideoPlayer: React.FC<Props> = ({ src, onEnd }) => {
         ref={videoRef}
         className="w-full h-full object-cover"
         src={src}
-        onEnded={onEnd}
-        playsInline
+        loop={loop && !freezeOnEnd}
         muted={muted}
-        autoPlay
       />
-      
-      {muted && (
-        <div className="absolute bottom-4 right-4">
-          <button
-            onClick={handleUnmute}
-            className="bg-white/80 text-black px-4 py-2 rounded-full shadow-lg hover:bg-white"
-          >
-            🔈 Unmute
-          </button>
-        </div>
-      )}
     </div>
   );
 };

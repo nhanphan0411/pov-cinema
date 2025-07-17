@@ -1,11 +1,32 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Steps Mono';
+  src: url('/fonts/Steps-Mono-Thin.otf') format('opentype'); /* use opentype for .otf */
+  font-weight: 300; /* use appropriate weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Steps Mono';
+  src: url('/fonts/Steps-Mono.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply globally */
+html, body {
+  font-family: 'Steps Mono', monospace, sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -22,5 +43,24 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+.bellBtn {
+  font-size: 4rem;
+}
+
+@keyframes slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: slow-rotate 100s linear infinite;
+  opacity: 0.3;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
 }

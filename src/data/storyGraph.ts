@@ -9,30 +9,129 @@ type StoryNode = {
 };
 
 export const storyGraph: Record<string, StoryNode> = {
-  "test_intro": {
-    src: "/videos/english_cut.webm",
+
+  "00": {
+    src: "/videos/final_clips/00.mov",
+    choices: []
+  },
+
+  "10": {
+    src: "/videos/final_clips/10 (test).mov",
     choices: [
-      { label: "spanish", next: "test_choice1" },
-      { label: "hindi", next: "test_choice2" },
-      { label: "german", next: "test_choice3" }
+      { label: "i think our date would be so short.", next: "11" },
+      { label: "romance is dead. i don't believe in love.", next: "31" },
     ]
   },
 
-  "test_choice1": {
-    src: "/videos/spanish.webm",
+  // ================================================ LINE 1 ==================================================== 
+
+  "11": {
+    src: "/videos/final_clips/11.mov",
+    choices: [
+      { label: "you are too fast!", next: "12A" },
+      { label: "time is too fast!", next: "12B" },
+    ]
+  },
+
+  "12A": {
+    src: "/videos/final_clips/12A.mov",
+    choices: [{ label: "", next: "unlocked_1" }]
+  },
+
+  "12B": {
+    src: "/videos/final_clips/12B.mov",
+    choices: [{ label: "", next: "unlocked_1" }]
+  },
+
+  "13": {
+    src: "/videos/final_clips/13.mov",
     choices: []
   },
 
-  "test_choice2": {
-    src: "/videos/hindi_cut.webm",
-    choices: []
+  // ================================================ LINE 3 ====================================================
+
+  "31": {
+    src: "/videos/final_clips/31.mov",
+    choices: [
+      { label: "what else you are beside an artist?", next: "32" },
+      { label: "tell me your secret.", next: "32" },
+    ]
   },
 
-  "test_choice3": {
-    src: "/videos/german.webm",
-    choices: []
+  "32": {
+  src: "/videos/final_clips/32.mov",
+  choices: [
+    { label: "yes. i'm here to get to know you no?", next: "33" },
+    { label: "hmm... still not sure if i want this version of you.", next: "31" },
+    ]
   },
 
+  "33": {
+  src: "/videos/final_clips/33.mov",
+  choices: [
+    { label: "yes, of course", next: "34" },
+    { label: "hmm... no.", next: "10" },
+    ]
+  },
 
-  // TBC: other story nodes
+  "34": {
+  src: "/videos/final_clips/34.mov",
+  choices: [
+    { label: "pose for me.", next: "35A" },
+    { label: "turn around & bend over for me.", next: "35B" },
+    ]
+  },
+
+  "35A": {
+  src: "/videos/final_clips/35A.mov",
+  choices: [
+    { label: "stick your tongue out.", next: "36A" },
+    { label: "slap yourself.", next: "36B" },
+    ]
+  },
+
+  "35B": {
+  src: "/videos/final_clips/35B.mov",
+  choices: [
+    { label: "stick your tongue out.", next: "36A" },
+    { label: "slap yourself.", next: "36B" },
+    ]
+  },
+
+  "36A": {
+  src: "/videos/final_clips/36A.mov",
+  choices: [
+    { label: "take your clothes off for me.", next: "unlocked_3" },
+    { label: "this is too much. how about ...tell you about your past loves.", next: "11" }
+    ]
+  },
+
+  "36B": {
+  src: "/videos/final_clips/36B.mov",
+  choices: [
+    { label: "take your clothes off for me.", next: "unlocked_3" },
+    { label: "this is too much. how about... tell you about your past lovers.", next: "11" }
+    ]
+  },
+
+  "37": {
+  src: "/videos/final_clips/37.mov",
+  choices: []
+  },
+
+  // ================================================ LINE 3 ====================================================
+  "unlocked_1" : {
+    src: "/videos/final_clips/unlocked.mov",
+    choices: [
+      {label: "", next: "13"}
+    ]
+  },
+
+  "unlocked_3" : {
+    src: "/videos/final_clips/unlocked.mov",
+    choices: [
+      {label: "", next: "37"}
+    ]
+  }
 };
+
